@@ -251,7 +251,6 @@ box_ids = [
 	'auxwobzrvqvpsjfgklthnyioqe'
 ]
 
-box_ids.sort()
 
 from multiprocessing import Pool
 from itertools import combinations
@@ -278,6 +277,8 @@ def compare_ids(ids):
 
 if __name__ == '__main__':
 	start_time = time()
+
+	box_ids.sort()
 
 	process_pool = Pool(4)
 	comparisons = process_pool.map(compare_ids, combinations(box_ids, 2))
