@@ -1,7 +1,7 @@
 from data import changes
 
 frequency = 0
-seen_frequencies = [0]
+seen_frequencies = set([0])
 
 while True:
 	for change in changes:
@@ -11,4 +11,4 @@ while True:
 			print('Frequency already seen:', frequency)
 			exit()
 		else:
-			seen_frequencies.append(frequency)
+			seen_frequencies.add(frequency)
