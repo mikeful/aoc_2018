@@ -5,6 +5,9 @@ start_time = time()
 
 max_width = 1000
 max_height = 1000
+
+# Using ranges avoids having to use short syntax "[0] * max_width * max_height" which creates copies of same list
+# See more at https://stackoverflow.com/a/6667529
 overlap_counts = [[0 for x in range(max_width)] for y in range(max_height)]
 
 # Fill overlaps
