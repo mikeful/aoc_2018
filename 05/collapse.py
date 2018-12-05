@@ -1,31 +1,25 @@
 from data import polymer
 from time import time
 from string import ascii_lowercase
+import re
 
 start_time = time()
 
-remaining = list(polymer)
+# Generate regex patters for valid to remove
+remove_patters = []
+for char in ascii_lowercase:
+	remove_patters.append(re.compile(char + char.upper()))
+	remove_patters.append(re.compile(char.upper() + char))
+
+remaining = polymer
 should_continue = True
 
 while should_continue:
 	last_length = len(remaining)
 
-	# Check and collapse pairs
-	for index in range(0, last_length):
-		try:
-			pair = [remaining[index], remaining[index + 1]]
-			if None not in pair:
-				if pair[1] in ascii_lowercase and pair[0] == pair[1].upper():
-					remaining[index] = None
-					remaining[index + 1] = None
-				elif pair[0] in ascii_lowercase and pair[0].upper() == pair[1]:
-					remaining[index] = None
-					remaining[index + 1] = None
-		except IndexError:
-			pass
-
-	# Filter collapsed/padding value from list
-	remaining = [x for x in remaining if x is not None]
+	# Collapse pairs
+	for pattern in remove_patters:
+		remaining = pattern.sub("", remaining)
 	
 	# Stop processing if polymer is no longer shortening
 	if last_length == len(remaining):
