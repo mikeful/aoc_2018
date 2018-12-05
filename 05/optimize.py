@@ -1,5 +1,6 @@
 from data import polymer
 from time import time
+from multiprocessing import Pool
 from string import ascii_lowercase
 import re
 
@@ -11,10 +12,7 @@ for char in ascii_lowercase:
 	remove_patters.append(re.compile(char + char.upper()))
 	remove_patters.append(re.compile(char.upper() + char))
 
-shortest_polymer = 99999
-
-for char in ascii_lowercase:
-	remaining = re.sub(char, "", polymer, flags=re.IGNORECASE)
+def collapse(remaining):
 	should_continue = True
 
 	while should_continue:
@@ -28,9 +26,23 @@ for char in ascii_lowercase:
 		if last_length == len(remaining):
 			should_continue = False
 
-	if len(remaining) < shortest_polymer:
-		shortest_polymer = len(remaining)
+	return len(remaining)
 
-print('Shorest polymer', shortest_polymer)
+# Generate all variations of polymer
+variations = []
+for char in ascii_lowercase:
+	variations.append(re.sub(char, "", polymer, flags=re.IGNORECASE))
 
-print('Finished in', time() - start_time)
+if __name__ == '__main__':
+	# Collapse variations in multiple "threads"
+	process_pool = Pool(None)
+	collapsed_lengths = process_pool.map(collapse, variations)
+
+	shortest_polymer = len(polymer)
+	for result in collapsed_lengths:
+		if result < shortest_polymer:
+			shortest_polymer = result
+
+	print('Shorest polymer', shortest_polymer)
+
+	print('Finished in', time() - start_time)
