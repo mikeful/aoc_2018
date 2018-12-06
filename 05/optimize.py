@@ -6,7 +6,7 @@ import re
 
 start_time = time()
 
-# Generate regex patters for valid to remove
+# Generate regex patterns for valid to remove
 remove_patters = []
 for char in ascii_lowercase:
 	remove_patters.append(re.compile(char + char.upper()))
