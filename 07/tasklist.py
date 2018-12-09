@@ -69,7 +69,7 @@ while penalty > 0:
 		reset_counter += 1
 		task_solution = smallest_solution.copy()
 
-	# Retryn from start if solving takes too long
+	# Retry from start if solving takes too long
 	if time() - solution_time > 10:
 		smallest_penalty = 99999
 		smallest_solution = []
@@ -80,6 +80,7 @@ while penalty > 0:
 
 print('Valid solution found:', ''.join(task_solution))
 
+# Sort solution tasks alphabetically while maintaining valid status
 solution_changed = True
 while solution_changed:
 	solution_changed = False

@@ -47,9 +47,10 @@ while timeline_changed:
 							# Stop processing
 							break
 					if timeline_changed:
-						# Task was moved, stop processing timeslots
+						# Task was moved, stop processing comparison timeslots
 						break
 			if timeline_changed:
+				# Task was moved, stop processing main timeslots
 				break
 
 # Extract timeline slot data into string ordered alphabetically per slot

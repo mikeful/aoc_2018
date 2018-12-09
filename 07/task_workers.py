@@ -22,6 +22,7 @@ for requirement in requirements:
 			tasks[dep_task] = set()
 	tasks[task].add(task_dep)
 
+# Simulate multiple workers with time counters and tasks moved out of queue
 worker_times = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0}
 worker_tasks = {0: '', 1: '', 2: '', 3: '', 4: ''}
 todo = set(tasks.keys())
@@ -34,7 +35,7 @@ while len(done) < len(tasks):
 			# Work work work
 			worker_times[worker_id] -= 1
 			if worker_times[worker_id] <= 0:
-				done.append(worker_task)				
+				done.append(worker_task)
 				worker_tasks[worker_id] = ''
 		if worker_tasks[worker_id] == '':
 			# Search available tasks
