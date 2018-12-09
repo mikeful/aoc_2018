@@ -21,7 +21,6 @@ for requirement in requirements:
 
 todo = set(tasks.keys())
 done = []
-
 todo_changed = True
 while len(todo) > 0:
 	# Search available tasks
