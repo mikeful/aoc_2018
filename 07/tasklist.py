@@ -77,16 +77,17 @@ while penalty > 0:
 
 print('Valid solution found:', ''.join(task_solution))
 
-last_solution = []
-while last_solution != task_solution:
+solution_changed = True
+while solution_changed:
 	for index, task in enumerate(task_solution[:-1]):
+		solution_changed = False
 		if ord(task) > ord(task_solution[index + 1]):
 			task_solution[index], task_solution[index + 1] = task_solution[index + 1], task_solution[index]
 			penalty = check_rules(''.join(task_solution))
 			if penalty > 0:
 				task_solution[index], task_solution[index + 1] = task_solution[index + 1], task_solution[index]
 			else:
-				last_solution = task_solution.copy()
+				solution_changed = True
 
 print('Solution after sort:', ''.join(task_solution))
 
