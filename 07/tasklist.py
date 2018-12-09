@@ -15,11 +15,11 @@ for requirement in requirements:
 	task = parsed['step']
 	task_dep = parsed['dependency']
 	if task not in tasks:
-		tasks[task] = []
+		tasks[task] = set()
 	for dep_task in task_dep:
 		if dep_task not in tasks:
-			tasks[dep_task] = []
-	tasks[task].append(task_dep)
+			tasks[dep_task] = set()
+	tasks[task].add(task_dep)
 
 # Sort dependencies
 tasks = {task_deps:sorted(tasks[task_deps]) for task_deps in tasks.keys()}
@@ -70,7 +70,7 @@ while penalty > 0:
 		task_solution = smallest_solution.copy()
 
 	# Retryn from start if solving takes too long
-	if time() - solution_time > 5:
+	if time() - solution_time > 10:
 		smallest_penalty = 99999
 		smallest_solution = []
 		swap_counter = 0
