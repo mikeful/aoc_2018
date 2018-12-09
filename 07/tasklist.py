@@ -16,6 +16,9 @@ for requirement in requirements:
 	task_dep = parsed['dependency']
 	if task not in tasks:
 		tasks[task] = []
+	for dep_task in task_dep:
+		if dep_task not in tasks:
+			tasks[dep_task] = []
 	tasks[task].append(task_dep)
 
 # Sort dependencies
@@ -79,8 +82,8 @@ print('Valid solution found:', ''.join(task_solution))
 
 solution_changed = True
 while solution_changed:
+	solution_changed = False
 	for index, task in enumerate(task_solution[:-1]):
-		solution_changed = False
 		if ord(task) > ord(task_solution[index + 1]):
 			task_solution[index], task_solution[index + 1] = task_solution[index + 1], task_solution[index]
 			penalty = check_rules(''.join(task_solution))
