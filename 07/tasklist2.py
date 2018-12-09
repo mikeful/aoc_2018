@@ -1,8 +1,6 @@
 from data import requirements
 from time import time
 import re
-import random
-from functools import lru_cache
 
 start_time = time()
 
