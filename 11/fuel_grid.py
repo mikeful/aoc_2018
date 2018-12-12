@@ -31,9 +31,9 @@ if __name__ == '__main__':
 
 	# Get largest power level and get coordinates for it
 	largest_level = max(coordinate_levels)
-	larget_index = coordinate_levels.index(largest_level)
-	larget_coordinates = list(coordinates)[larget_index]
+	largest_index = coordinate_levels.index(largest_level)
+	largest_coordinates = list(coordinates)[largest_index]
 
-	print(larget_coordinates)
+	print(largest_coordinates)
 
 	print('Finished in', time() - start_time)
